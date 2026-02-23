@@ -6,6 +6,7 @@ library(shinydashboard)
 library(DT)
 library(leaflet)
 library(dplyr)
+library(openxlsx)
 # Source des fonctions
 source("fonctions_cobra.R")
 
@@ -353,7 +354,7 @@ server <- function(input, output, session) {
     },
     content = function(file) {
       req(resultats())
-      write.csv(resultats()$pilote, file, row.names = FALSE, fileEncoding = "UTF-8")
+      write.xlsx(resultats()$pilote, file, row.names = FALSE, fileEncoding = "UTF-8")
     }
   )
   
@@ -363,7 +364,7 @@ server <- function(input, output, session) {
     },
     content = function(file) {
       req(resultats())
-      write.csv(resultats()$objects_location, file, row.names = FALSE, fileEncoding = "UTF-8")
+      write.xlsx(resultats()$objects_location, file, row.names = FALSE, fileEncoding = "UTF-8")
     }
   )
   
@@ -373,7 +374,7 @@ server <- function(input, output, session) {
     },
     content = function(file) {
       req(resultats())
-      write.csv(resultats()$ims_salissures, file, row.names = FALSE, fileEncoding = "UTF-8")
+      write.xlsx(resultats()$ims_salissures, file, row.names = FALSE, fileEncoding = "UTF-8")
     }
   )
   
@@ -383,7 +384,7 @@ server <- function(input, output, session) {
     },
     content = function(file) {
       req(resultats())
-      write.csv(resultats()$corbeilles, file, row.names = FALSE, fileEncoding = "UTF-8")
+      write.xlsx(resultats()$corbeilles, file, row.names = FALSE, fileEncoding = "UTF-8")
     }
   )
   
@@ -397,25 +398,25 @@ server <- function(input, output, session) {
       temp_dir <- tempdir()
       
       # Créer les 4 fichiers CSV
-      write.csv(resultats()$pilote, 
-                file.path(temp_dir, "pilote.csv"), 
+      write.xlsx(resultats()$pilote, 
+                file.path(temp_dir, "pilote.xlsx"), 
                 row.names = FALSE, fileEncoding = "UTF-8")
-      write.csv(resultats()$objects_location, 
-                file.path(temp_dir, "objects_location.csv"), 
+      write.xlsx(resultats()$objects_location, 
+                file.path(temp_dir, "objects_location.xlsx"), 
                 row.names = FALSE, fileEncoding = "UTF-8")
-      write.csv(resultats()$ims_salissures, 
-                file.path(temp_dir, "ims_salissures.csv"), 
+      write.xlsx(resultats()$ims_salissures, 
+                file.path(temp_dir, "ims_salissures.xlsx"), 
                 row.names = FALSE, fileEncoding = "UTF-8")
-      write.csv(resultats()$corbeilles, 
-                file.path(temp_dir, "corbeilles.csv"), 
+      write.xlsx(resultats()$corbeilles, 
+                file.path(temp_dir, "corbeilles.xlsx"), 
                 row.names = FALSE, fileEncoding = "UTF-8")
       
       # Crée le ZIP
       zip(file, files = c(
-        file.path(temp_dir, "pilote.csv"),
-        file.path(temp_dir, "objects_location.csv"),
-        file.path(temp_dir, "ims_salissures.csv"),
-        file.path(temp_dir, "corbeilles.csv")
+        file.path(temp_dir, "pilote.xlsx"),
+        file.path(temp_dir, "objects_location.xlsx"),
+        file.path(temp_dir, "ims_salissures.xlsx"),
+        file.path(temp_dir, "corbeilles.xlsx")
       ), flags = "-j")
     }
   )
