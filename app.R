@@ -350,7 +350,7 @@ server <- function(input, output, session) {
   # ── Téléchargement ──────────────────────────────────────────────
   output$download_pilote <- downloadHandler(
     filename = function() {
-      paste0("pilote_", Sys.Date(), ".csv")
+      paste0("pilote_", Sys.Date(), ".xlsx")
     },
     content = function(file) {
       req(resultats())
@@ -360,7 +360,7 @@ server <- function(input, output, session) {
   
   output$download_objects <- downloadHandler(
     filename = function() {
-      paste0("objects_location_", Sys.Date(), ".csv")
+      paste0("objects_location_", Sys.Date(), ".xlsx")
     },
     content = function(file) {
       req(resultats())
@@ -370,7 +370,7 @@ server <- function(input, output, session) {
   
   output$download_ims <- downloadHandler(
     filename = function() {
-      paste0("ims_salissures_", Sys.Date(), ".csv")
+      paste0("ims_salissures_", Sys.Date(), ".xlsx")
     },
     content = function(file) {
       req(resultats())
@@ -380,7 +380,7 @@ server <- function(input, output, session) {
   
   output$download_corbeilles <- downloadHandler(
     filename = function() {
-      paste0("corbeilles_", Sys.Date(), ".csv")
+      paste0("corbeilles_", Sys.Date(), ".xlsx")
     },
     content = function(file) {
       req(resultats())
