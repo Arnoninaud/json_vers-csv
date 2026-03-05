@@ -208,7 +208,7 @@ traiter_json_cobra <- function(chemin_json, exporter_csv = TRUE, dossier_sortie 
   rating <- ifelse(is.null(json_data$rating), NA, json_data$rating)
   commentaire_val <- ifelse(is.null(json_data$comment), NA, json_data$comment)
   delegate <- ifelse(is.null(info$delegateInfo), NA, info$delegateInfo)
-  
+  caption <- ifelse(is.null(json_data$caption), NA, json_data$caption)
   if (verbose) {
     cat("ID Campagne:", id_campaign, "\n")
     cat("Nombre de locations:", nrow(locations), "\n")
@@ -317,6 +317,7 @@ traiter_json_cobra <- function(chemin_json, exporter_csv = TRUE, dossier_sortie 
     id_campaign = id_campaign,
     userId = userId,
     commentaire = commentaire_val,
+    caption = caption,
     ville = ville,
     rue = rue,
     jour = jour,
@@ -367,6 +368,7 @@ traiter_json_cobra <- function(chemin_json, exporter_csv = TRUE, dossier_sortie 
         id_campaign = id_campaign,
         userId = userId,
         commentaire = commentaire_val,
+        caption = caption,
         ville = ville,
         rue = rue,
         jour = jour,
@@ -444,26 +446,26 @@ traiter_json_cobra <- function(chemin_json, exporter_csv = TRUE, dossier_sortie 
     base_name <- tools::file_path_sans_ext(basename(chemin_json))
     
     if (nrow(df_pilote) > 0) {
-      fichier <- file.path(dossier_sortie, paste0(base_name, "_pilote.xlsx"))
-      write.xlsx(df_pilote, fichier, row.names = FALSE, fileEncoding = "UTF-8")
+      fichier <- file.path(dossier_sortie, paste0(base_name, "_pilote.csv"))
+      write.csv(df_pilote, fichier, row.names = FALSE, fileEncoding = "UTF-8")
       if (verbose) cat("\n📁 Exporté:", fichier, "\n")
     }
     
     if (nrow(df_matched) > 0) {
-      fichier <- file.path(dossier_sortie, paste0(base_name, "_objects_location.xlsx"))
-      write.xlsx(df_matched, fichier, row.names = FALSE, fileEncoding = "UTF-8")
+      fichier <- file.path(dossier_sortie, paste0(base_name, "_objects_location.csv"))
+      write.csv(df_matched, fichier, row.names = FALSE, fileEncoding = "UTF-8")
       if (verbose) cat("📁 Exporté:", fichier, "\n")
     }
     
     if (nrow(df_ims_salissures) > 0) {
-      fichier <- file.path(dossier_sortie, paste0(base_name, "_ims_salissures.xlsx"))
-      write.xlsx(df_ims_salissures, fichier, row.names = FALSE, fileEncoding = "UTF-8")
+      fichier <- file.path(dossier_sortie, paste0(base_name, "_ims_salissures.csv"))
+      write.csv(df_ims_salissures, fichier, row.names = FALSE, fileEncoding = "UTF-8")
       if (verbose) cat("📁 Exporté:", fichier, "\n")
     }
     
     if (nrow(df_poubelles_with_gps) > 0) {
-      fichier <- file.path(dossier_sortie, paste0(base_name, "_corbeilles.xlsx"))
-      write.xlsx(df_poubelles_with_gps, fichier, row.names = FALSE, fileEncoding = "UTF-8")
+      fichier <- file.path(dossier_sortie, paste0(base_name, "_corbeilles.csv"))
+      write.csv(df_poubelles_with_gps, fichier, row.names = FALSE, fileEncoding = "UTF-8")
       if (verbose) cat("📁 Exporté:", fichier, "\n")
     }
   }
